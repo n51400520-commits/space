@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Твои планеты
+  // Планеты
   const planets = [
     { id: 'mercury', name: 'Меркурий', img: 'assets/mercury.png', projectId: 'p1' },
     { id: 'venus',   name: 'Шолпан',   img: 'assets/venus.png',   projectId: 'p2' },
@@ -15,36 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: 'p4', title: 'Ойындар — Mini Game', category: 'games',  desc: 'Canvas, анимациялар, физика.' },
   ];
 
-  const track = document.getElementById('carouselTrack');
-  const cards = document.getElementById('projectCards');
   const modal = document.getElementById('projectModal');
   const modalTitle = document.getElementById('modalTitle');
   const modalDesc = document.getElementById('modalDesc');
   const modalClose = document.getElementById('modalClose');
+  const cards = document.getElementById('projectCards');
 
-  // Карусель с вращающимися планетами
-  function renderPlanets() {
-    track.innerHTML = '';
-    planets.forEach(p => {
-      const item = document.createElement('div');
-      item.className = 'planet';
-      item.innerHTML = `<img src="${p.img}" alt="${p.name}" />`;
-      item.addEventListener('click', () => openProjectModal(p.projectId));
-      track.appendChild(item);
-    });
-
-    // Автопрокрутка
-    let offset = 0;
-    function tick() {
-      offset += 0.5;
-      track.scrollLeft = offset;
-      if (offset >= track.scrollWidth / 2) offset = 0;
-      requestAnimationFrame(tick);
-    }
-    tick();
-  }
-
-  // Карточки проектов
+  // Рендер карточек
   function renderCards(list) {
     cards.innerHTML = '';
     list.forEach(pr => {
@@ -66,11 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!pr) return;
     modalTitle.textContent = pr.title;
     modalDesc.textContent = pr.desc;
-    if (document.startViewTransition) {
-      document.startViewTransition(() => modal.showModal());
-    } else {
-      modal.showModal();
-    }
+    modal.showModal();
   }
   modalClose.addEventListener('click', () => modal.close());
 
@@ -95,6 +68,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Запуск
-  renderPlanets();
   renderCards(projects);
 });
