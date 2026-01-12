@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Планеталар
   const planets = [
     { id: 'mercury', name: 'Меркурий', img: 'assets/mercury.png', projectId: 'p1' },
     { id: 'venus',   name: 'Шолпан',   img: 'assets/venus.png',   projectId: 'p2' },
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { id: 'mars',    name: 'Марс',     img: 'assets/mars.png',    projectId: 'p4' },
   ];
 
+  // Жобалар
   const projects = [
     { id: 'p1', title: 'Фронтенд — UI Kit', category: 'frontend', desc: 'Компоненттер кітапханасы, адаптивті дизайн.' },
     { id: 'p2', title: 'Дизайн — Брендинг', category: 'design',   desc: 'Логотип, түстер палитрасы, гайдлайн.' },
@@ -20,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalDesc = document.getElementById('modalDesc');
   const modalClose = document.getElementById('modalClose');
 
+  // Карусель
   function renderPlanets() {
     track.innerHTML = '';
     planets.forEach(p => {
@@ -29,8 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
       item.addEventListener('click', () => openProjectModal(p.projectId));
       track.appendChild(item);
     });
+    // Бесконечная прокрутка
+    let offset = 0;
+    function tick() {
+      offset += 0.3;
+      track.scrollLeft = offset;
+      if (offset >= track.scrollWidth / 2) offset = 0;
+      requestAnimationFrame(tick);
+    }
+    tick();
   }
 
+  // Карточки
   function renderCards(list) {
     cards.innerHTML = '';
     list.forEach(pr => {
@@ -46,16 +59,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Модалка
   function openProjectModal(id) {
     const pr = projects.find(p => p.id === id);
     if (!pr) return;
     modalTitle.textContent = pr.title;
     modalDesc.textContent = pr.desc;
-    modal.showModal();
+    if (document.startViewTransition) {
+      document.startViewTransition(() => modal.showModal());
+    } else {
+      modal.showModal();
+    }
   }
-
   modalClose.addEventListener('click', () => modal.close());
 
+  // Фильтр
   document.querySelectorAll('.filters button').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
@@ -66,6 +84,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  renderPlanets();
-  renderCards(projects);
-});
+  // Параллакс эффект
+  document.addEventListener('mousemove', (e) => {
+    const stars = document.querySelector('.stars');
+    if (!stars) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    stars.style.backgroundPosition = `${x}px ${y}px`;
+  });
+
+  // Навигация секций
