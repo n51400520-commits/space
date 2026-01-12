@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Планеталар
+  // Твои планеты
   const planets = [
     { id: 'mercury', name: 'Меркурий', img: 'assets/mercury.png', projectId: 'p1' },
     { id: 'venus',   name: 'Шолпан',   img: 'assets/venus.png',   projectId: 'p2' },
@@ -22,20 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalDesc = document.getElementById('modalDesc');
   const modalClose = document.getElementById('modalClose');
 
-  // Карусель
+  // Карусель с вращающимися планетами
   function renderPlanets() {
     track.innerHTML = '';
     planets.forEach(p => {
-      const item = document.createElement('button');
+      const item = document.createElement('div');
       item.className = 'planet';
-      item.innerHTML = `<img src="${p.img}" alt="${p.name}" /><div>${p.name}</div>`;
+      item.innerHTML = `<img src="${p.img}" alt="${p.name}" />`;
       item.addEventListener('click', () => openProjectModal(p.projectId));
       track.appendChild(item);
     });
-    // Бесконечная прокрутка
+
+    // Автопрокрутка
     let offset = 0;
     function tick() {
-      offset += 0.3;
+      offset += 0.5;
       track.scrollLeft = offset;
       if (offset >= track.scrollWidth / 2) offset = 0;
       requestAnimationFrame(tick);
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tick();
   }
 
-  // Карточки
+  // Карточки проектов
   function renderCards(list) {
     cards.innerHTML = '';
     list.forEach(pr => {
@@ -84,13 +85,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Параллакс эффект
+  // Параллакс эффект для звёзд
   document.addEventListener('mousemove', (e) => {
     const stars = document.querySelector('.stars');
     if (!stars) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
     stars.style.backgroundPosition = `${x}px ${y}px`;
   });
 
-  // Навигация секций
+  // Запуск
+  renderPlanets();
+  renderCards(projects);
+});
