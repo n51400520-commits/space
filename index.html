@@ -9,16 +9,22 @@
 <body>
   <header>
     <h1>🚀 Ғарыш саяхаты</h1>
+    <nav>
+      <button onclick="showSection('hero')">Планеталар</button>
+      <button onclick="showSection('projects')">Жобалар</button>
+    </nav>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- Планеталар секциясы -->
+    <section id="hero">
       <h2>Планеталар</h2>
       <p>Менің жобаларым — әр планета сияқты өз орбитасында.</p>
       <div class="carousel-track" id="carouselTrack"></div>
     </section>
 
-    <section class="projects">
+    <!-- Жобалар секциясы -->
+    <section id="projects" style="display:none;">
       <h2>Жобалар</h2>
       <div class="filters">
         <button data-filter="all" class="active">Барлығы</button>
@@ -34,6 +40,7 @@
     <p>© 2026. Байланыс: <a href="mailto:you@example.com">you@example.com</a></p>
   </footer>
 
+  <!-- Модалка -->
   <dialog id="projectModal">
     <h3 id="modalTitle"></h3>
     <p id="modalDesc"></p>
