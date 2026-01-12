@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #0b0f1a;
+  color: #e6f1ff;
+}
+
+header, footer {
+  text-align: center;
+  padding: 16px;
+  background: #121826;
+}
+
+.hero {
+  padding: 24px;
+  text-align: center;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.planet {
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 120px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+.planet img {
+  width: 64px;
+  height: 64px;
+}
+
+.projects {
+  padding: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filters button {
+  padding: 8px 12px;
+  background: #1f2937;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filters button.active {
+  background: #7dd3fc;
+  color: #0b0f1a;
+}
+
+.cards {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: #121826;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+dialog {
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #1f2937;
+  color: white;
+}
