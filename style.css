@@ -3,6 +3,15 @@ body {
   font-family: sans-serif;
   background: #0b0f1a;
   color: #e6f1ff;
+  overflow-x: hidden;
+}
+
+/* View-transition */
+:root {
+  view-transition-name: root;
+}
+section {
+  view-transition-name: section;
 }
 
 header, footer {
@@ -11,18 +20,28 @@ header, footer {
   background: #121826;
 }
 
-.hero {
+nav button {
+  margin: 0 8px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #1f2937;
+  color: white;
+  cursor: pointer;
+}
+
+.hero, .projects {
   padding: 24px;
   text-align: center;
 }
 
+/* Карусель */
 .carousel-track {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
+  overflow-x: hidden;
   padding: 16px;
 }
-
 .planet {
   background: #1f2937;
   border-radius: 12px;
@@ -32,31 +51,17 @@ header, footer {
   color: white;
   cursor: pointer;
 }
-
 .planet img {
   width: 64px;
   height: 64px;
 }
 
-.projects {
-  padding: 24px;
-}
-
+/* Фильтр */
 .filters {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
 }
-
-.filters button {
-  padding: 8px 12px;
-  background: #1f2937;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .filters button.active {
   background: #7dd3fc;
   color: #0b0f1a;
@@ -66,17 +71,30 @@ header, footer {
   display: grid;
   gap: 16px;
 }
-
 .card {
   background: #121826;
   padding: 16px;
   border-radius: 12px;
 }
 
+/* Модалка */
 dialog {
   padding: 16px;
   border: none;
   border-radius: 12px;
   background: #1f2937;
   color: white;
+}
+
+/* Параллакс фон */
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('assets/stars.png') repeat;
+  animation: moveStars 60s linear infinite;
+}
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 1000px; }
 }
